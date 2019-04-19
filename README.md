@@ -1,5 +1,6 @@
 # Memester
 Use in tandem with https://github.com/Psychobagger/knowyourmeme.com-Crawler to generate a meme RDF file to use.
+This project can be used with other RDF ontologies, but you will need to specify your ontology's IRI.
 
 The process:
 RDF2Walks -> Walks2Vec -> Clustering -> Principal Component Analysis
