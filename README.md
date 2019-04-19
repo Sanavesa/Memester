@@ -5,7 +5,7 @@ The process:
 RDF2Walks -> Walks2Vec -> Clustering -> Principal Component Analysis
 
 ## RDF2Walks
-Walks through the RDF graph randomly and generates a walks file, for use in the conversion to vectors.
+Walks through the RDF graph randomly and generates a walks file, for use in the conversion to vectors. Works with .rdf, .owl, .ttl, .n3, etc. files. Just make a folder, put your ontology file in it and select that folder to work with it.
 
 ## Walks2Vec
 Generates vectors for each "word" in a walk "sentence", using Word2Vec AI in Python (CBOW model).
