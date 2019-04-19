@@ -1,5 +1,5 @@
 # Memester
-Use in tandem with https://github.com/Psychobagger/knowyourmeme.com-Crawler to generate a meme RDF file, or use your own RDF file of any type!
+Use in tandem with https://github.com/Psychobagger/knowyourmeme.com-Crawler to generate a meme RDF file to use.
 
 The process:
 RDF2Walks -> Walks2Vec -> Clustering -> Principal Component Analysis
