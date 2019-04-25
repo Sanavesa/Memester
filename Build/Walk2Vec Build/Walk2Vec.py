@@ -60,11 +60,20 @@ model.train(sentences=sentences, total_examples=model.corpus_count, total_words=
 # Export Vectors
 i = 1
 my_vocab = list(model.wv.vocab)
+logs = []
 for word in my_vocab:
     if config_json["filter_output"] == "true" and "http://erau.edu/ontology/meme.owl#" not in word and "Meme" not in word:
+        logs.append("Skipping " + str(word))
         continue
 
     with open('../Vectors/word_' + str(i) + '.vec', 'w') as file:
+        logs.append("Exporting " + str(word))
         file.write(str(word) + "\n")
         file.write(str(model[word]))
     i += 1
+
+
+# Export log file
+with open("export.log", "w") as file:
+    for log in logs:
+        file.write(str(log) + "\n")
