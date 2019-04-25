@@ -1,7 +1,12 @@
 package memester.app;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -27,6 +32,10 @@ import memester.rdf2walk.RDFLoader;
 import memester.rdf2walk.RandomWalker;
 import memester.rdf2walk.Walk;
 import memester.rdf2walk.WalkExporter;
+import memester.vec2cluster.Cluster;
+import memester.vec2cluster.KMeans;
+import memester.vec2cluster.LabeledVector;
+import memester.vec2cluster.Vector;
 
 public class MemesterApp extends Application
 {
@@ -45,9 +54,9 @@ public class MemesterApp extends Application
 		rdf2WalkTab = new Tab("RDF2Walk");
 		walk2VecTab = new Tab("Walk2Vec");
 		vec2ClusterTab = new Tab("Vec2Cluster");
-		cluster2PCATab = new Tab("Cluster2PCA");
+//		cluster2PCATab = new Tab("Cluster2PCA");
 		
-		tabPane = new TabPane(rdf2WalkTab, walk2VecTab, vec2ClusterTab, cluster2PCATab);
+		tabPane = new TabPane(rdf2WalkTab, walk2VecTab, vec2ClusterTab);
 		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		
 		scene = new Scene(tabPane, 640, 480);
@@ -56,13 +65,9 @@ public class MemesterApp extends Application
 		stage.setTitle("Memester");
 		
 		setupRDF2Walk();
+		setupWalk2Vec();
+		setupVec2Cluster();
 	}
-	
-	Dataset dataset = null;
-	File ontologyDirectory = null;
-	TextField textFieldNodesToWalk = null;
-	TextField textFieldWalksPerNode = null;
-	TextField textFieldWalkDepth = null;
 	
 	private void setupRDF2Walk()
 	{
@@ -89,6 +94,7 @@ public class MemesterApp extends Application
 			int depth = Integer.parseInt(textFieldWalkDepth.getText());
 			
 			Walk[] walks = generateWalks(ontologyDirectory.getPath(), nodesToWalk, numWalksPerNode, depth);
+			fileChooserWalks.setInitialFileName("Walks.txt");
 			File exportFile = fileChooserWalks.showSaveDialog(stage);
 			saveWalks(exportFile.getPath(), walks);
 		});
@@ -164,6 +170,176 @@ public class MemesterApp extends Application
 		WalkExporter.export(filename, walks);
 	}
 	
+	private void setupWalk2Vec()
+	{
+		Button btnVectorize = new Button("Vectorize");
+		btnVectorize.setOnAction(e ->
+		{
+			try
+			{
+				Runtime.getRuntime().exec("C:\\Users\\Sanavesa\\Desktop\\Meeting Files\\Walk2Vec\\dist\\Walk2Vec\\Walk2Vec.exe", null, new File("C:\\Users\\Sanavesa\\Desktop\\Meeting Files\\Walk2Vec\\dist\\Walk2Vec\\"));
+			}
+			catch (IOException e1)
+			{
+				e1.printStackTrace();
+			}
+		});
+		
+		VBox vbox = new VBox(btnVectorize);
+		walk2VecTab.setContent(vbox);
+	}
+	
+	private void setupVec2Cluster()
+	{
+		DirectoryChooser directoryChooserVectors = new DirectoryChooser();
+		
+		Label labelNumberOfClusters = new Label("Number of Clusters");
+		textFieldNumberOfClusters = new TextField("10");
+		textFieldNumberOfClusters.textProperty().addListener((args, oldV, newV) ->
+		{
+			try
+			{
+				int x = Integer.parseInt(textFieldNumberOfClusters.getText());
+				if(x <= 0)
+					throw new NumberFormatException();
+			}
+			catch(NumberFormatException e1)
+			{
+				textFieldNumberOfClusters.setText(oldV);
+			}
+		});
+		
+		Label labelNumberOfIterations = new Label("Number of Iterations");
+		textFieldNumberOfIterations = new TextField("10");
+		textFieldNumberOfIterations.textProperty().addListener((args, oldV, newV) ->
+		{
+			try
+			{
+				int x = Integer.parseInt(textFieldNumberOfIterations.getText());
+				if(x <= 0)
+					throw new NumberFormatException();
+			}
+			catch(NumberFormatException e1)
+			{
+				textFieldNumberOfIterations.setText(oldV);
+			}
+		});
+		
+		Button btnClusterize = new Button("Clusterize");
+		btnClusterize.setOnAction(e ->
+		{
+			File vectorDirectory = directoryChooserVectors.showDialog(stage);
+			
+			List<LabeledVector> vectors = readVectors(vectorDirectory);
+			int dimensions = vectors.get(0).getDimensions();
+			
+			int clusterCount = Integer.parseInt(textFieldNumberOfClusters.getText());
+			int iterations = Integer.parseInt(textFieldNumberOfIterations.getText());
+			
+			KMeans kmeans = new KMeans(clusterCount, dimensions, vectors.toArray(new LabeledVector[vectors.size()]));
+			for(int i = 0; i < iterations; i++)
+			{
+				System.out.println("Cluster Iteration " + (i+1) + " / " + iterations);
+				kmeans.update();
+			}
+			
+			System.out.println("Done clustering!");
+			
+			System.out.println("Exporting clusters!");
+			
+			FileChooser fileChooserWalks = new FileChooser(); 
+			FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+			fileChooserWalks.getExtensionFilters().add(extFilter);
+			fileChooserWalks.setInitialFileName("Clusters.txt");
+			File exportFile = fileChooserWalks.showSaveDialog(stage);
+			
+			try(PrintWriter writer = new PrintWriter(exportFile))
+			{
+				for(Cluster cluster : kmeans.getClusters())
+				{
+					writer.println("Cluster has: ");
+					
+					for(Vector vector : cluster.getPoints())
+					{
+						LabeledVector point = (LabeledVector) vector;
+						writer.println("\t" + point.getName() + "\t" + point);
+					}
+					
+					writer.println("=============================================================================");
+				}
+			}
+			catch(Exception e1)
+			{
+				e1.printStackTrace();
+			}
+		});
+		
+		VBox vbox = new VBox(labelNumberOfClusters, textFieldNumberOfClusters, labelNumberOfIterations, textFieldNumberOfIterations, btnClusterize);
+		vec2ClusterTab.setContent(vbox);
+	}
+	
+	public List<LabeledVector> readVectors(File folder)
+	{
+		List<LabeledVector> vectors = new ArrayList<>();
+		System.out.println("Starting to read vectors");
+		
+		for(File file : folder.listFiles())
+		{
+			if(file.isDirectory())
+				continue;
+			
+			try
+			{
+				List<String> lines = Files.readAllLines(file.toPath());
+				List<Double> values = new ArrayList<>();
+				
+				// First line is always the iri of the node
+				String iri = lines.get(0);
+				
+				for(int i = 1; i < lines.size(); i++)
+				{
+					String line = lines.get(i);
+					
+					// Special case for first and last line
+					if(i == 1)
+					{
+						line = line.substring(1);
+					}
+					else if(i == lines.size() - 1)
+					{
+						line = line.substring(0, line.length() - 1);
+					}
+					
+					// Process numbers
+					Scanner scanner = new Scanner(line);
+					while(scanner.hasNextDouble())
+					{
+						double readValue = scanner.nextDouble();
+						values.add(readValue);
+					}
+					scanner.close();
+				}
+				
+				double[] convertedValues = new double[values.size()];
+				for(int i = 0; i < values.size(); i++)
+				{
+					convertedValues[i] = values.get(i).doubleValue();
+				}
+				
+				LabeledVector labeledVector = new LabeledVector(iri, convertedValues);
+				vectors.add(labeledVector);
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		
+		System.out.println("Done reading");
+		
+		return vectors;
+	}
+	
 	private Stage stage;
 	private Scene scene;
 	private TabPane tabPane;
@@ -171,4 +347,12 @@ public class MemesterApp extends Application
 	private Tab walk2VecTab;
 	private Tab vec2ClusterTab;
 	private Tab cluster2PCATab;
+	
+	Dataset dataset = null;
+	File ontologyDirectory = null;
+	TextField textFieldNodesToWalk = null;
+	TextField textFieldWalksPerNode = null;
+	TextField textFieldWalkDepth = null;
+	TextField textFieldNumberOfClusters = null;
+	TextField textFieldNumberOfIterations = null;
 }
