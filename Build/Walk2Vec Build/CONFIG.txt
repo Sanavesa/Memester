@@ -1,0 +1,8 @@
+size=500
+workers=5
+window=10
+sg=1
+negative=15
+iter=5
+input_filename="walks.txt"
+output_filename="model.bin"
