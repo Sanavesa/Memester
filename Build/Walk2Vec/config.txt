@@ -1,0 +1,8 @@
+{
+	"iterations": 20,
+	"negative": 15,
+	"sg": 1,
+	"size": 500,
+	"window": 3,
+	"workers": 10
+}

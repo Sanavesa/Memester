@@ -42,8 +42,11 @@ public class RandomWalker implements GraphWalker
 				break;
 			
 			final Node node = graphNode.getNode();
-			if(node.isLiteral())
+			
+			if(isInvalidNode(node))
+			{
 				continue;
+			}
 			
 			for(int i = 0; i < numWalksPerNode; i++)
 			{
@@ -75,5 +78,27 @@ public class RandomWalker implements GraphWalker
 		System.out.println("Done walking! Elapsed time: " + elapsedTime + " secs\n");
 		
 		return walks;
+	}
+	
+	private boolean isInvalidNode(Node node)
+	{
+		if(node.isLiteral())
+			return true;
+		String iri = "";
+		try
+		{
+			iri = node.getURI();
+		}
+		catch(Exception e)
+		{
+			return true;
+		}
+		if(!iri.contains("http://erau.edu/ontology/meme.owl#"))
+			return true;
+		if(!iri.contains("Meme"))
+			return true;
+		if(iri.contains("http://erau.edu/ontology/meme.owl#Meme"))
+			return true;
+		return false;
 	}
 }

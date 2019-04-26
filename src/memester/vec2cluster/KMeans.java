@@ -1,6 +1,8 @@
 package memester.vec2cluster;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class KMeans
 {
@@ -73,6 +75,19 @@ public class KMeans
 	public Cluster[] getClusters()
 	{
 		return clusters;
+	}
+	
+	public Cluster[] getFilteredClusters()
+	{
+		List<Cluster> filtered = new ArrayList<>();
+		for(Cluster c : clusters)
+		{
+			if(c.getPoints().size() > 0)
+			{
+				filtered.add(c);
+			}
+		}
+		return filtered.toArray(new Cluster[filtered.size()]);
 	}
 	
 	public Vector[] getPoints()
