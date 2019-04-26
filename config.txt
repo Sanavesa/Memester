@@ -1,9 +1,0 @@
-{
-    "filter_output": "true",
-    "iterations": 5,
-    "negative": 15,
-    "sg": 1,
-    "size": 500,
-    "window": 10,
-    "workers": 5
-}
