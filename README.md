@@ -17,5 +17,5 @@ Takes the vectors and clusters them into groups to try to find similarities betw
 ### Principal Component Analysis (PCA)
 The vectors produced have 500 components, so PCA attempts to reduce these vectors to two dimensions for visualization.
 
-## Ya like DFDs, kid?
-![alt text](https://github.com/Sanavesa/Memester/blob/master/resources/level2_DFD_2.png)
+## Data Flow Diagram
+![alt text](https://github.com/Sanavesa/Memester/blob/master/resources/DFD.png)
