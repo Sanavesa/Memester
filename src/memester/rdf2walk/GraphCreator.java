@@ -60,6 +60,10 @@ public final class GraphCreator
 				GraphNode object = graph.get(objectNode);
 
 				GraphNode.addBiConnection(subject, predicateNode, object);
+				
+				System.out.println(subject);
+				System.out.println(object);
+				System.out.println();
 			}
 		}
 		finally

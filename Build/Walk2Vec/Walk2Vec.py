@@ -76,3 +76,14 @@ for word in my_vocab:
 with open("export.log", "w") as file:
     for log in logs:
         file.write(str(log) + "\n")
+
+#Check for similarity
+t1 = "http://erau.edu/ontology/meme.owl#SerbianEmpirein1350Meme"
+print(t1)
+print(model.wv.most_similar(positive=t1))
+
+print("\n")
+
+t2 = "http://erau.edu/ontology/meme.owl#YouShallNotPassMeme"
+print(t2)
+print(model.wv.most_similar(positive=t2))

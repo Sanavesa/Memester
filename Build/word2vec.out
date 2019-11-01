@@ -1,0 +1,224 @@
+2019-04-26 13:38:42,567 : INFO : collecting all words and their counts
+2019-04-26 13:38:42,567 : INFO : PROGRESS: at sentence #0, processed 0 words, keeping 0 word types
+2019-04-26 13:38:42,569 : INFO : collected 26 word types from a corpus of 10000 raw words and 1000 sentences
+2019-04-26 13:38:42,569 : INFO : Loading a fresh vocabulary
+2019-04-26 13:38:42,569 : INFO : effective_min_count=5 retains 26 unique words (100% of original 26, drops 0)
+2019-04-26 13:38:42,569 : INFO : effective_min_count=5 leaves 10000 word corpus (100% of original 10000, drops 0)
+2019-04-26 13:38:42,572 : INFO : deleting the raw counts dictionary of 26 items
+2019-04-26 13:38:42,572 : INFO : sample=0.001 downsamples 26 most-common words
+2019-04-26 13:38:42,573 : INFO : downsampling leaves estimated 1872 word corpus (18.7% of prior 10000)
+2019-04-26 13:38:42,574 : INFO : estimated required memory for 26 words and 100 dimensions: 33800 bytes
+2019-04-26 13:38:42,574 : INFO : resetting layer weights
+2019-04-26 13:38:42,576 : INFO : training model with 10 workers on 26 vocabulary and 100 features, using sg=1 hs=0 sample=0.001 negative=15 window=3
+2019-04-26 13:38:42,576 : INFO : worker thread finished; awaiting finish of 9 more threads
+2019-04-26 13:38:42,576 : INFO : worker thread finished; awaiting finish of 8 more threads
+2019-04-26 13:38:42,576 : INFO : worker thread finished; awaiting finish of 7 more threads
+2019-04-26 13:38:42,576 : INFO : worker thread finished; awaiting finish of 6 more threads
+2019-04-26 13:38:42,576 : INFO : worker thread finished; awaiting finish of 5 more threads
+2019-04-26 13:38:42,576 : INFO : worker thread finished; awaiting finish of 4 more threads
+2019-04-26 13:38:42,576 : INFO : worker thread finished; awaiting finish of 3 more threads
+2019-04-26 13:38:42,576 : INFO : worker thread finished; awaiting finish of 2 more threads
+2019-04-26 13:38:42,576 : INFO : worker thread finished; awaiting finish of 1 more threads
+2019-04-26 13:38:42,593 : INFO : worker thread finished; awaiting finish of 0 more threads
+2019-04-26 13:38:42,593 : INFO : EPOCH - 1 : training on 10000 raw words (1875 effective words) took 0.0s, 194247 effective words/s
+2019-04-26 13:38:42,594 : WARNING : EPOCH - 1 : supplied raw word count (10000) did not equal expected count (1000)
+2019-04-26 13:38:42,599 : INFO : worker thread finished; awaiting finish of 9 more threads
+2019-04-26 13:38:42,599 : INFO : worker thread finished; awaiting finish of 8 more threads
+2019-04-26 13:38:42,599 : INFO : worker thread finished; awaiting finish of 7 more threads
+2019-04-26 13:38:42,600 : INFO : worker thread finished; awaiting finish of 6 more threads
+2019-04-26 13:38:42,600 : INFO : worker thread finished; awaiting finish of 5 more threads
+2019-04-26 13:38:42,600 : INFO : worker thread finished; awaiting finish of 4 more threads
+2019-04-26 13:38:42,600 : INFO : worker thread finished; awaiting finish of 3 more threads
+2019-04-26 13:38:42,600 : INFO : worker thread finished; awaiting finish of 2 more threads
+2019-04-26 13:38:42,600 : INFO : worker thread finished; awaiting finish of 1 more threads
+2019-04-26 13:38:42,604 : INFO : worker thread finished; awaiting finish of 0 more threads
+2019-04-26 13:38:42,605 : INFO : EPOCH - 2 : training on 10000 raw words (1925 effective words) took 0.0s, 254749 effective words/s
+2019-04-26 13:38:42,605 : WARNING : EPOCH - 2 : supplied raw word count (10000) did not equal expected count (1000)
+2019-04-26 13:38:42,610 : INFO : worker thread finished; awaiting finish of 9 more threads
+2019-04-26 13:38:42,611 : INFO : worker thread finished; awaiting finish of 8 more threads
+2019-04-26 13:38:42,611 : INFO : worker thread finished; awaiting finish of 7 more threads
+2019-04-26 13:38:42,611 : INFO : worker thread finished; awaiting finish of 6 more threads
+2019-04-26 13:38:42,611 : INFO : worker thread finished; awaiting finish of 5 more threads
+2019-04-26 13:38:42,611 : INFO : worker thread finished; awaiting finish of 4 more threads
+2019-04-26 13:38:42,611 : INFO : worker thread finished; awaiting finish of 3 more threads
+2019-04-26 13:38:42,611 : INFO : worker thread finished; awaiting finish of 2 more threads
+2019-04-26 13:38:42,611 : INFO : worker thread finished; awaiting finish of 1 more threads
+2019-04-26 13:38:42,615 : INFO : worker thread finished; awaiting finish of 0 more threads
+2019-04-26 13:38:42,615 : INFO : EPOCH - 3 : training on 10000 raw words (1832 effective words) took 0.0s, 269133 effective words/s
+2019-04-26 13:38:42,615 : WARNING : EPOCH - 3 : supplied raw word count (10000) did not equal expected count (1000)
+2019-04-26 13:38:42,622 : INFO : worker thread finished; awaiting finish of 9 more threads
+2019-04-26 13:38:42,622 : INFO : worker thread finished; awaiting finish of 8 more threads
+2019-04-26 13:38:42,622 : INFO : worker thread finished; awaiting finish of 7 more threads
+2019-04-26 13:38:42,622 : INFO : worker thread finished; awaiting finish of 6 more threads
+2019-04-26 13:38:42,622 : INFO : worker thread finished; awaiting finish of 5 more threads
+2019-04-26 13:38:42,623 : INFO : worker thread finished; awaiting finish of 4 more threads
+2019-04-26 13:38:42,623 : INFO : worker thread finished; awaiting finish of 3 more threads
+2019-04-26 13:38:42,623 : INFO : worker thread finished; awaiting finish of 2 more threads
+2019-04-26 13:38:42,623 : INFO : worker thread finished; awaiting finish of 1 more threads
+2019-04-26 13:38:42,627 : INFO : worker thread finished; awaiting finish of 0 more threads
+2019-04-26 13:38:42,628 : INFO : EPOCH - 4 : training on 10000 raw words (1847 effective words) took 0.0s, 223916 effective words/s
+2019-04-26 13:38:42,628 : WARNING : EPOCH - 4 : supplied raw word count (10000) did not equal expected count (1000)
+2019-04-26 13:38:42,634 : INFO : worker thread finished; awaiting finish of 9 more threads
+2019-04-26 13:38:42,634 : INFO : worker thread finished; awaiting finish of 8 more threads
+2019-04-26 13:38:42,634 : INFO : worker thread finished; awaiting finish of 7 more threads
+2019-04-26 13:38:42,634 : INFO : worker thread finished; awaiting finish of 6 more threads
+2019-04-26 13:38:42,634 : INFO : worker thread finished; awaiting finish of 5 more threads
+2019-04-26 13:38:42,634 : INFO : worker thread finished; awaiting finish of 4 more threads
+2019-04-26 13:38:42,634 : INFO : worker thread finished; awaiting finish of 3 more threads
+2019-04-26 13:38:42,634 : INFO : worker thread finished; awaiting finish of 2 more threads
+2019-04-26 13:38:42,634 : INFO : worker thread finished; awaiting finish of 1 more threads
+2019-04-26 13:38:42,635 : INFO : worker thread finished; awaiting finish of 0 more threads
+2019-04-26 13:38:42,635 : INFO : EPOCH - 5 : training on 10000 raw words (1755 effective words) took 0.0s, 235702 effective words/s
+2019-04-26 13:38:42,635 : WARNING : EPOCH - 5 : supplied raw word count (10000) did not equal expected count (1000)
+2019-04-26 13:38:42,635 : INFO : training on a 50000 raw words (9234 effective words) took 0.1s, 147702 effective words/s
+2019-04-26 13:38:42,635 : WARNING : under 10 jobs per worker: consider setting a smaller `batch_words' for smoother alpha decay
+2019-04-26 13:55:17,385 : INFO : collecting all words and their counts
+2019-04-26 13:55:17,385 : INFO : PROGRESS: at sentence #0, processed 0 words, keeping 0 word types
+2019-04-26 13:55:17,386 : INFO : collected 26 word types from a corpus of 10000 raw words and 1000 sentences
+2019-04-26 13:55:17,386 : INFO : Loading a fresh vocabulary
+2019-04-26 13:55:17,386 : INFO : effective_min_count=5 retains 26 unique words (100% of original 26, drops 0)
+2019-04-26 13:55:17,387 : INFO : effective_min_count=5 leaves 10000 word corpus (100% of original 10000, drops 0)
+2019-04-26 13:55:17,387 : INFO : deleting the raw counts dictionary of 26 items
+2019-04-26 13:55:17,387 : INFO : sample=0.001 downsamples 26 most-common words
+2019-04-26 13:55:17,387 : INFO : downsampling leaves estimated 1871 word corpus (18.7% of prior 10000)
+2019-04-26 13:55:17,387 : INFO : estimated required memory for 26 words and 100 dimensions: 33800 bytes
+2019-04-26 13:55:17,387 : INFO : resetting layer weights
+2019-04-26 13:55:17,388 : INFO : training model with 10 workers on 26 vocabulary and 100 features, using sg=1 hs=0 sample=0.001 negative=15 window=3
+2019-04-26 13:55:17,395 : INFO : worker thread finished; awaiting finish of 9 more threads
+2019-04-26 13:55:17,395 : INFO : worker thread finished; awaiting finish of 8 more threads
+2019-04-26 13:55:17,395 : INFO : worker thread finished; awaiting finish of 7 more threads
+2019-04-26 13:55:17,395 : INFO : worker thread finished; awaiting finish of 6 more threads
+2019-04-26 13:55:17,395 : INFO : worker thread finished; awaiting finish of 5 more threads
+2019-04-26 13:55:17,395 : INFO : worker thread finished; awaiting finish of 4 more threads
+2019-04-26 13:55:17,395 : INFO : worker thread finished; awaiting finish of 3 more threads
+2019-04-26 13:55:17,395 : INFO : worker thread finished; awaiting finish of 2 more threads
+2019-04-26 13:55:17,395 : INFO : worker thread finished; awaiting finish of 1 more threads
+2019-04-26 13:55:17,400 : INFO : worker thread finished; awaiting finish of 0 more threads
+2019-04-26 13:55:17,400 : INFO : EPOCH - 1 : training on 10000 raw words (1868 effective words) took 0.0s, 266668 effective words/s
+2019-04-26 13:55:17,400 : WARNING : EPOCH - 1 : supplied raw word count (10000) did not equal expected count (1000)
+2019-04-26 13:55:17,406 : INFO : worker thread finished; awaiting finish of 9 more threads
+2019-04-26 13:55:17,407 : INFO : worker thread finished; awaiting finish of 8 more threads
+2019-04-26 13:55:17,407 : INFO : worker thread finished; awaiting finish of 7 more threads
+2019-04-26 13:55:17,407 : INFO : worker thread finished; awaiting finish of 6 more threads
+2019-04-26 13:55:17,407 : INFO : worker thread finished; awaiting finish of 5 more threads
+2019-04-26 13:55:17,407 : INFO : worker thread finished; awaiting finish of 4 more threads
+2019-04-26 13:55:17,407 : INFO : worker thread finished; awaiting finish of 3 more threads
+2019-04-26 13:55:17,407 : INFO : worker thread finished; awaiting finish of 2 more threads
+2019-04-26 13:55:17,407 : INFO : worker thread finished; awaiting finish of 1 more threads
+2019-04-26 13:55:17,411 : INFO : worker thread finished; awaiting finish of 0 more threads
+2019-04-26 13:55:17,411 : INFO : EPOCH - 2 : training on 10000 raw words (1794 effective words) took 0.0s, 280428 effective words/s
+2019-04-26 13:55:17,411 : WARNING : EPOCH - 2 : supplied raw word count (10000) did not equal expected count (1000)
+2019-04-26 13:55:17,417 : INFO : worker thread finished; awaiting finish of 9 more threads
+2019-04-26 13:55:17,418 : INFO : worker thread finished; awaiting finish of 8 more threads
+2019-04-26 13:55:17,418 : INFO : worker thread finished; awaiting finish of 7 more threads
+2019-04-26 13:55:17,418 : INFO : worker thread finished; awaiting finish of 6 more threads
+2019-04-26 13:55:17,418 : INFO : worker thread finished; awaiting finish of 5 more threads
+2019-04-26 13:55:17,418 : INFO : worker thread finished; awaiting finish of 4 more threads
+2019-04-26 13:55:17,418 : INFO : worker thread finished; awaiting finish of 3 more threads
+2019-04-26 13:55:17,418 : INFO : worker thread finished; awaiting finish of 2 more threads
+2019-04-26 13:55:17,418 : INFO : worker thread finished; awaiting finish of 1 more threads
+2019-04-26 13:55:17,422 : INFO : worker thread finished; awaiting finish of 0 more threads
+2019-04-26 13:55:17,422 : INFO : EPOCH - 3 : training on 10000 raw words (1852 effective words) took 0.0s, 277122 effective words/s
+2019-04-26 13:55:17,422 : WARNING : EPOCH - 3 : supplied raw word count (10000) did not equal expected count (1000)
+2019-04-26 13:55:17,428 : INFO : worker thread finished; awaiting finish of 9 more threads
+2019-04-26 13:55:17,428 : INFO : worker thread finished; awaiting finish of 8 more threads
+2019-04-26 13:55:17,429 : INFO : worker thread finished; awaiting finish of 7 more threads
+2019-04-26 13:55:17,429 : INFO : worker thread finished; awaiting finish of 6 more threads
+2019-04-26 13:55:17,429 : INFO : worker thread finished; awaiting finish of 5 more threads
+2019-04-26 13:55:17,429 : INFO : worker thread finished; awaiting finish of 4 more threads
+2019-04-26 13:55:17,429 : INFO : worker thread finished; awaiting finish of 3 more threads
+2019-04-26 13:55:17,429 : INFO : worker thread finished; awaiting finish of 2 more threads
+2019-04-26 13:55:17,429 : INFO : worker thread finished; awaiting finish of 1 more threads
+2019-04-26 13:55:17,433 : INFO : worker thread finished; awaiting finish of 0 more threads
+2019-04-26 13:55:17,433 : INFO : EPOCH - 4 : training on 10000 raw words (1884 effective words) took 0.0s, 272689 effective words/s
+2019-04-26 13:55:17,433 : WARNING : EPOCH - 4 : supplied raw word count (10000) did not equal expected count (1000)
+2019-04-26 13:55:17,440 : INFO : worker thread finished; awaiting finish of 9 more threads
+2019-04-26 13:55:17,440 : INFO : worker thread finished; awaiting finish of 8 more threads
+2019-04-26 13:55:17,441 : INFO : worker thread finished; awaiting finish of 7 more threads
+2019-04-26 13:55:17,441 : INFO : worker thread finished; awaiting finish of 6 more threads
+2019-04-26 13:55:17,441 : INFO : worker thread finished; awaiting finish of 5 more threads
+2019-04-26 13:55:17,441 : INFO : worker thread finished; awaiting finish of 4 more threads
+2019-04-26 13:55:17,441 : INFO : worker thread finished; awaiting finish of 3 more threads
+2019-04-26 13:55:17,442 : INFO : worker thread finished; awaiting finish of 2 more threads
+2019-04-26 13:55:17,442 : INFO : worker thread finished; awaiting finish of 1 more threads
+2019-04-26 13:55:17,446 : INFO : worker thread finished; awaiting finish of 0 more threads
+2019-04-26 13:55:17,446 : INFO : EPOCH - 5 : training on 10000 raw words (1888 effective words) took 0.0s, 253000 effective words/s
+2019-04-26 13:55:17,446 : WARNING : EPOCH - 5 : supplied raw word count (10000) did not equal expected count (1000)
+2019-04-26 13:55:17,446 : INFO : training on a 50000 raw words (9286 effective words) took 0.1s, 159240 effective words/s
+2019-04-26 13:55:17,446 : WARNING : under 10 jobs per worker: consider setting a smaller `batch_words' for smoother alpha decay
+2019-04-26 13:55:17,613 : INFO : precomputing L2-norms of word weight vectors
+2019-04-26 13:55:31,109 : INFO : collecting all words and their counts
+2019-04-26 13:55:31,109 : INFO : PROGRESS: at sentence #0, processed 0 words, keeping 0 word types
+2019-04-26 13:55:31,111 : INFO : collected 26 word types from a corpus of 10000 raw words and 1000 sentences
+2019-04-26 13:55:31,111 : INFO : Loading a fresh vocabulary
+2019-04-26 13:55:31,111 : INFO : effective_min_count=5 retains 26 unique words (100% of original 26, drops 0)
+2019-04-26 13:55:31,111 : INFO : effective_min_count=5 leaves 10000 word corpus (100% of original 10000, drops 0)
+2019-04-26 13:55:31,111 : INFO : deleting the raw counts dictionary of 26 items
+2019-04-26 13:55:31,111 : INFO : sample=0.001 downsamples 26 most-common words
+2019-04-26 13:55:31,111 : INFO : downsampling leaves estimated 1872 word corpus (18.7% of prior 10000)
+2019-04-26 13:55:31,112 : INFO : estimated required memory for 26 words and 100 dimensions: 33800 bytes
+2019-04-26 13:55:31,112 : INFO : resetting layer weights
+2019-04-26 13:55:31,112 : INFO : training model with 10 workers on 26 vocabulary and 100 features, using sg=1 hs=0 sample=0.001 negative=15 window=3
+2019-04-26 13:55:31,119 : INFO : worker thread finished; awaiting finish of 9 more threads
+2019-04-26 13:55:31,120 : INFO : worker thread finished; awaiting finish of 8 more threads
+2019-04-26 13:55:31,120 : INFO : worker thread finished; awaiting finish of 7 more threads
+2019-04-26 13:55:31,120 : INFO : worker thread finished; awaiting finish of 6 more threads
+2019-04-26 13:55:31,120 : INFO : worker thread finished; awaiting finish of 5 more threads
+2019-04-26 13:55:31,120 : INFO : worker thread finished; awaiting finish of 4 more threads
+2019-04-26 13:55:31,120 : INFO : worker thread finished; awaiting finish of 3 more threads
+2019-04-26 13:55:31,120 : INFO : worker thread finished; awaiting finish of 2 more threads
+2019-04-26 13:55:31,120 : INFO : worker thread finished; awaiting finish of 1 more threads
+2019-04-26 13:55:31,124 : INFO : worker thread finished; awaiting finish of 0 more threads
+2019-04-26 13:55:31,124 : INFO : EPOCH - 1 : training on 10000 raw words (1866 effective words) took 0.0s, 259034 effective words/s
+2019-04-26 13:55:31,124 : WARNING : EPOCH - 1 : supplied raw word count (10000) did not equal expected count (1000)
+2019-04-26 13:55:31,131 : INFO : worker thread finished; awaiting finish of 9 more threads
+2019-04-26 13:55:31,131 : INFO : worker thread finished; awaiting finish of 8 more threads
+2019-04-26 13:55:31,131 : INFO : worker thread finished; awaiting finish of 7 more threads
+2019-04-26 13:55:31,131 : INFO : worker thread finished; awaiting finish of 6 more threads
+2019-04-26 13:55:31,131 : INFO : worker thread finished; awaiting finish of 5 more threads
+2019-04-26 13:55:31,132 : INFO : worker thread finished; awaiting finish of 4 more threads
+2019-04-26 13:55:31,132 : INFO : worker thread finished; awaiting finish of 3 more threads
+2019-04-26 13:55:31,132 : INFO : worker thread finished; awaiting finish of 2 more threads
+2019-04-26 13:55:31,132 : INFO : worker thread finished; awaiting finish of 1 more threads
+2019-04-26 13:55:31,136 : INFO : worker thread finished; awaiting finish of 0 more threads
+2019-04-26 13:55:31,136 : INFO : EPOCH - 2 : training on 10000 raw words (1916 effective words) took 0.0s, 257174 effective words/s
+2019-04-26 13:55:31,136 : WARNING : EPOCH - 2 : supplied raw word count (10000) did not equal expected count (1000)
+2019-04-26 13:55:31,144 : INFO : worker thread finished; awaiting finish of 9 more threads
+2019-04-26 13:55:31,144 : INFO : worker thread finished; awaiting finish of 8 more threads
+2019-04-26 13:55:31,144 : INFO : worker thread finished; awaiting finish of 7 more threads
+2019-04-26 13:55:31,144 : INFO : worker thread finished; awaiting finish of 6 more threads
+2019-04-26 13:55:31,144 : INFO : worker thread finished; awaiting finish of 5 more threads
+2019-04-26 13:55:31,144 : INFO : worker thread finished; awaiting finish of 4 more threads
+2019-04-26 13:55:31,145 : INFO : worker thread finished; awaiting finish of 3 more threads
+2019-04-26 13:55:31,145 : INFO : worker thread finished; awaiting finish of 2 more threads
+2019-04-26 13:55:31,145 : INFO : worker thread finished; awaiting finish of 1 more threads
+2019-04-26 13:55:31,148 : INFO : worker thread finished; awaiting finish of 0 more threads
+2019-04-26 13:55:31,148 : INFO : EPOCH - 3 : training on 10000 raw words (1834 effective words) took 0.0s, 257273 effective words/s
+2019-04-26 13:55:31,148 : WARNING : EPOCH - 3 : supplied raw word count (10000) did not equal expected count (1000)
+2019-04-26 13:55:31,155 : INFO : worker thread finished; awaiting finish of 9 more threads
+2019-04-26 13:55:31,155 : INFO : worker thread finished; awaiting finish of 8 more threads
+2019-04-26 13:55:31,156 : INFO : worker thread finished; awaiting finish of 7 more threads
+2019-04-26 13:55:31,156 : INFO : worker thread finished; awaiting finish of 6 more threads
+2019-04-26 13:55:31,156 : INFO : worker thread finished; awaiting finish of 5 more threads
+2019-04-26 13:55:31,156 : INFO : worker thread finished; awaiting finish of 4 more threads
+2019-04-26 13:55:31,156 : INFO : worker thread finished; awaiting finish of 3 more threads
+2019-04-26 13:55:31,156 : INFO : worker thread finished; awaiting finish of 2 more threads
+2019-04-26 13:55:31,156 : INFO : worker thread finished; awaiting finish of 1 more threads
+2019-04-26 13:55:31,160 : INFO : worker thread finished; awaiting finish of 0 more threads
+2019-04-26 13:55:31,160 : INFO : EPOCH - 4 : training on 10000 raw words (1911 effective words) took 0.0s, 264426 effective words/s
+2019-04-26 13:55:31,161 : WARNING : EPOCH - 4 : supplied raw word count (10000) did not equal expected count (1000)
+2019-04-26 13:55:31,167 : INFO : worker thread finished; awaiting finish of 9 more threads
+2019-04-26 13:55:31,167 : INFO : worker thread finished; awaiting finish of 8 more threads
+2019-04-26 13:55:31,167 : INFO : worker thread finished; awaiting finish of 7 more threads
+2019-04-26 13:55:31,168 : INFO : worker thread finished; awaiting finish of 6 more threads
+2019-04-26 13:55:31,168 : INFO : worker thread finished; awaiting finish of 5 more threads
+2019-04-26 13:55:31,168 : INFO : worker thread finished; awaiting finish of 4 more threads
+2019-04-26 13:55:31,168 : INFO : worker thread finished; awaiting finish of 3 more threads
+2019-04-26 13:55:31,168 : INFO : worker thread finished; awaiting finish of 2 more threads
+2019-04-26 13:55:31,168 : INFO : worker thread finished; awaiting finish of 1 more threads
+2019-04-26 13:55:31,172 : INFO : worker thread finished; awaiting finish of 0 more threads
+2019-04-26 13:55:31,172 : INFO : EPOCH - 5 : training on 10000 raw words (1839 effective words) took 0.0s, 273946 effective words/s
+2019-04-26 13:55:31,172 : WARNING : EPOCH - 5 : supplied raw word count (10000) did not equal expected count (1000)
+2019-04-26 13:55:31,172 : INFO : training on a 50000 raw words (9366 effective words) took 0.1s, 155169 effective words/s
+2019-04-26 13:55:31,172 : WARNING : under 10 jobs per worker: consider setting a smaller `batch_words' for smoother alpha decay
+2019-04-26 13:55:31,322 : INFO : precomputing L2-norms of word weight vectors
