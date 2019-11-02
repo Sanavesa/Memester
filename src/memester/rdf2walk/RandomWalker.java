@@ -99,8 +99,10 @@ public class RandomWalker implements GraphWalker
 	{
 		if(node == null)
 			return true;
+
 		if(node.isLiteral())
 			return true;
+		
 		String iri = "";
 		try
 		{
@@ -110,12 +112,17 @@ public class RandomWalker implements GraphWalker
 		{
 			return true;
 		}
-		if(!iri.contains("http://erau-semantic-research.com/2019/memo"))
+
+		if(!iri.contains("http://erau-semantic-research.com/2019/memo/0.1/"))
 			return true;
+		
+		// properties are always lowerCase i.e: relatedMeme
+		if(Character.isLowerCase(iri.charAt("http://erau-semantic-research.com/2019/memo/0.1/".length())))
+			return true;
+		
 		if(!iri.contains("Meme"))
 			return true;
-//		if(iri.contains("http://erau.edu/ontology/meme.owl#Meme"))
-//			return true;
+
 		return false;
 	}
 }
