@@ -47,6 +47,7 @@ public class Vec2ClusterTab extends Tab
 		numIterationsTextField = new TextField("10");
 		exportButton = new Button("Export");
 		clusterButton = new Button("Cluster");
+		autoClusterButton = new Button("Auto Cluster");
 		exportProgressIndicator = new ProgressIndicator(0);
 		vectorsDirectoryChooser = new DirectoryChooser();
 		exportFileChooser = new  FileChooser();
@@ -61,7 +62,7 @@ public class Vec2ClusterTab extends Tab
 		HBox row1 = new HBox(30, vectorsLabel, vectorsLoadedLabel, browseButton);
 		HBox row2 = new HBox(30, numClustersLabel, numClustersTextField);
 		HBox row3 = new HBox(30, numIterationsLabel, numIterationsTextField);
-		HBox row4 = new HBox(30, exportButton, clusterButton, exportProgressIndicator);
+		HBox row4 = new HBox(30, exportButton, clusterButton, autoClusterButton, exportProgressIndicator);
 		
 		root.getChildren().addAll(row1, row2, row3, row4);
 		root.setPadding(new Insets(30));
@@ -167,6 +168,7 @@ public class Vec2ClusterTab extends Tab
 		exportButton.setOnAction(e -> onExportButtonPressed());
 		
 		clusterButton.setOnAction(e -> onClusterButtonPressed());
+		autoClusterButton.setOnAction(e -> onAutoClusterButtonPressed());
 		
 		exportProgressIndicator.setVisible(false);
 	}
@@ -186,9 +188,11 @@ public class Vec2ClusterTab extends Tab
 		{
 			try(PrintWriter writer = new PrintWriter(file))
 			{
-				for(Cluster cluster : kmeans.getFilteredClusters())
+				Cluster[] clusters = kmeans.getFilteredClusters();
+				writer.println("Contains " + clusters.length + " clusters. Total error of " + String.format("%.3f", kmeans.getError()) + "\n");
+				for(Cluster cluster : clusters)
 				{
-					writer.println("Cluster has: ");
+					writer.println("Cluster (error = " + String.format("%.3f", cluster.getError()) + "):");
 					
 					for(Vector vector : cluster.getPoints())
 					{
@@ -262,6 +266,8 @@ public class Vec2ClusterTab extends Tab
 			}
 		}
 		
+		System.out.println("Loaded " + vectors.size() + " vectors");
+		
 		return vectors;
 	}
 	
@@ -276,12 +282,70 @@ public class Vec2ClusterTab extends Tab
 			Platform.runLater(() -> updateProgressIndicator(0));
 			List<LabeledVector> vectors = readVectors(vectorsDirectory);
 			int dimensions = vectors.get(0).getDimensions();
-			
 			kmeans = new KMeans(numClusters, dimensions, vectors.toArray(new LabeledVector[vectors.size()]));
 			for(int i = 0; i < numIterations; i++)
 			{
 				kmeans.update();
+				System.out.println("KMEANS iteration " + (i+1));
 			}
+			Platform.runLater(() -> updateProgressIndicator(1));
+		}).start();
+	}
+	
+	private void onAutoClusterButtonPressed()
+	{
+		showProgressIndicator(true);
+		int numClusters = Integer.parseInt(numClustersTextField.getText());
+		int numIterations = Integer.parseInt(numIterationsTextField.getText());
+		
+		new Thread(() ->
+		{
+			Platform.runLater(() -> updateProgressIndicator(0));
+			List<LabeledVector> vectors = readVectors(vectorsDirectory);
+			Vector[] points = vectors.toArray(new LabeledVector[vectors.size()]);
+			int dimensions = vectors.get(0).getDimensions();
+			double slope = 0;
+			double prevError = 0;
+			double firstSlope = 0;
+			
+			for(int size = 2; size <= numClusters; size++)
+			{
+				KMeans temp = new KMeans(size, dimensions, points);
+				for(int i = 0; i < numIterations; i++)
+				{
+					temp.update();
+//					System.out.println("KMEANS cluster size " + size + ", iteration " + (i+1));
+				}
+				
+				double error = temp.getError();
+				
+				if(size == 2)
+				{
+					slope = Double.NEGATIVE_INFINITY;
+				}
+				else if(size == 3)
+				{
+					slope = error - prevError;
+					firstSlope = slope * 0.1f;
+					System.out.println(firstSlope);
+				}
+				else
+				{
+					slope = 0.9*slope + 0.1*(error - prevError);
+				}
+				
+				prevError = error;
+				
+				System.out.println("\tCluster size " + size + " has error " + String.format("%.0f", error) + " with " + temp.getFilteredClusters().length + " effective clusters and a slope of " + String.format("%.1f", slope));
+				
+				if(slope >= firstSlope)
+				{
+					kmeans = temp;
+					System.out.println("Updating.. using " + size);
+					break;
+				}
+			}
+			
 			Platform.runLater(() -> updateProgressIndicator(1));
 		}).start();
 	}
@@ -299,6 +363,7 @@ public class Vec2ClusterTab extends Tab
 		}
 		exportButton.setDisable(directory == null);
 		clusterButton.setDisable(directory == null);
+		autoClusterButton.setDisable(directory == null);
 	}
 	
 	private void showProgressIndicator(boolean show)
@@ -325,5 +390,6 @@ public class Vec2ClusterTab extends Tab
 	private final TextField numIterationsTextField;
 	private final Button exportButton;
 	private final Button clusterButton;
+	private final Button autoClusterButton;
 	private final ProgressIndicator exportProgressIndicator;
 }

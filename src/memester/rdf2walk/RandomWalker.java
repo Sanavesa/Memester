@@ -54,20 +54,35 @@ public class RandomWalker implements GraphWalker
 				
 				GraphNode currentGraphNode = graphNode;
 				
-				for(int j = 0; j < depth; j+=2)
+				for(int j = 0; j < depth; j+=1)
 				{
 					sequence[j] = currentGraphNode.getNode();
 					
 					final int randomIndex = (int) (Math.random() * currentGraphNode.getConnections().size());
 					GraphConnection conn = currentGraphNode.getConnections().get(randomIndex);
 					
-					if(j+1 < depth)
-					{
-						sequence[j+1] = conn.getPredicate();
-					}
+//					if(j+1 < depth)
+//					{
+//						sequence[j+1] = conn.getPredicate();
+//					}
 					
 					currentGraphNode = conn.getObject();
 				}
+				
+//				for(int j = 0; j < depth; j+=2)
+//				{
+//					sequence[j] = currentGraphNode.getNode();
+//					
+//					final int randomIndex = (int) (Math.random() * currentGraphNode.getConnections().size());
+//					GraphConnection conn = currentGraphNode.getConnections().get(randomIndex);
+//					
+//					if(j+1 < depth)
+//					{
+//						sequence[j+1] = conn.getPredicate();
+//					}
+//					
+//					currentGraphNode = conn.getObject();
+//				}
 				
 				final Walk w = new Walk(sequence);
 				walks[walkIndex++] = w;
@@ -82,6 +97,8 @@ public class RandomWalker implements GraphWalker
 	
 	private boolean isInvalidNode(Node node)
 	{
+		if(node == null)
+			return true;
 		if(node.isLiteral())
 			return true;
 		String iri = "";
@@ -93,12 +110,12 @@ public class RandomWalker implements GraphWalker
 		{
 			return true;
 		}
-		if(!iri.contains("http://erau.edu/ontology/meme.owl#"))
+		if(!iri.contains("http://erau-semantic-research.com/2019/memo"))
 			return true;
 		if(!iri.contains("Meme"))
 			return true;
-		if(iri.contains("http://erau.edu/ontology/meme.owl#Meme"))
-			return true;
+//		if(iri.contains("http://erau.edu/ontology/meme.owl#Meme"))
+//			return true;
 		return false;
 	}
 }
