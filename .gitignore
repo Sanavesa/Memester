@@ -21,3 +21,31 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /bin/
+Meme Ontology/GOSP.dat
+Meme Ontology/GOSP.idn
+Meme Ontology/GPOS.dat
+Meme Ontology/GPOS.idn
+Meme Ontology/GSPO.dat
+Meme Ontology/GSPO.idn
+Meme Ontology/journal.jrnl
+Meme Ontology/node2id.dat
+Meme Ontology/node2id.idn
+Meme Ontology/nodes.dat
+Meme Ontology/OSP.dat
+Meme Ontology/OSP.idn
+Meme Ontology/OSPG.dat
+Meme Ontology/OSPG.idn
+Meme Ontology/POS.dat
+Meme Ontology/POS.idn
+Meme Ontology/POSG.dat
+Meme Ontology/POSG.idn
+Meme Ontology/prefix2id.dat
+Meme Ontology/prefix2id.idn
+Meme Ontology/prefixes.dat
+Meme Ontology/prefixIdx.dat
+Meme Ontology/prefixIdx.idn
+Meme Ontology/SPO.dat
+Meme Ontology/SPO.idn
+Meme Ontology/SPOG.dat
+Meme Ontology/SPOG.idn
+Meme Ontology/tdb.lock
