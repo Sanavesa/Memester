@@ -1,0 +1,2 @@
+Uses gensim to learn word embeddings.
+Will utilize Walks/meme_nodes.txt to differentiate between meme URIs and other URIs. Only those listed in that file are vectorized.
