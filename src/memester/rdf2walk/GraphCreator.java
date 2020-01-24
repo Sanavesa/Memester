@@ -2,9 +2,11 @@ package memester.rdf2walk;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.jena.graph.Node;
 import org.apache.jena.query.Dataset;
@@ -27,13 +29,15 @@ public final class GraphCreator
 	 * @param dataset - the JENA dataset of the RDF file
 	 * @return the graph representation
 	 */
-	public static List<GraphNode> createGraph(Dataset dataset)
+	public static RDFGraph createGraph(Dataset dataset)
 	{
 		dataset.begin(ReadWrite.READ);
 		Map<Node, GraphNode> graph = new HashMap<>();
 		
 		final long startTime = System.nanoTime();
 		System.out.println("Creating graph...");
+		
+		Set<GraphNode> uniqueMemeNodes = new HashSet<>();
 
 		try
 		{
@@ -45,7 +49,12 @@ public final class GraphCreator
 				Node subjectNode = quad.getSubject();
 				Node predicateNode = quad.getPredicate();
 				Node objectNode = quad.getObject();
-
+				
+				if(NodeValidator.isInvalidNode(subjectNode))
+				{
+					continue;
+				}
+				
 				if (!graph.containsKey(subjectNode))
 				{
 					graph.put(subjectNode, new GraphNode(subjectNode));
@@ -61,9 +70,7 @@ public final class GraphCreator
 
 				GraphNode.addBiConnection(subject, predicateNode, object);
 				
-				System.out.println(subject);
-				System.out.println(object);
-				System.out.println();
+				uniqueMemeNodes.add(subject);
 			}
 		}
 		finally
@@ -73,8 +80,8 @@ public final class GraphCreator
 		
 		List<GraphNode> doneGraph = new ArrayList<>(graph.values());
 		final double elapsedTime = (System.nanoTime() - startTime) / 1_000_000_000.0;
-		System.out.println("Done graph construction. Size: " + doneGraph.size() + " nodes. Elapsed Time: " + elapsedTime + "secs\n");
+		System.out.println("Done graph construction. Size: " + doneGraph.size() + " nodes and " + uniqueMemeNodes.size() + " memes. Elapsed Time: " + elapsedTime + "secs\n");
 		
-		return doneGraph;
+		return new RDFGraph(doneGraph, uniqueMemeNodes);
 	}
 }

@@ -1,7 +1,8 @@
 package memester.app;
 
 import java.io.File;
-import java.util.List;
+
+import org.apache.jena.query.Dataset;
 
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -21,12 +22,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
-
-import org.apache.jena.query.Dataset;
-
 import memester.rdf2walk.GraphCreator;
-import memester.rdf2walk.GraphNode;
 import memester.rdf2walk.GraphWalker;
+import memester.rdf2walk.MemeNodesExporter;
+import memester.rdf2walk.RDFGraph;
 import memester.rdf2walk.RDFLoader;
 import memester.rdf2walk.RandomWalker;
 import memester.rdf2walk.Walk;
@@ -50,9 +49,11 @@ public class RDF2WalkTab extends Tab
 		walksPerNodeTextField = new TextField("50");
 		exportButton = new Button("Export");
 		walkButton = new Button("Walk");
+		exportMemeNodesButton = new Button("Export Meme Nodes");
 		exportProgressIndicator = new ProgressIndicator(0);
 		ontologyDirectoryChooser = new DirectoryChooser();
 		exportFileChooser = new  FileChooser();
+		exportMemeNodesFileChooser = new FileChooser();
 		
 		initializeLayout();
 		setOntologyDirectory(null);
@@ -65,7 +66,7 @@ public class RDF2WalkTab extends Tab
 		HBox row2 = new HBox(30, walksDepthLabel, walksDepthSlider);
 		HBox row3 = new HBox(30, numWalksLabel, numWalksTextField);
 		HBox row4 = new HBox(30, walksPerNodeLabel, walksPerNodeTextField);
-		HBox row5 = new HBox(30, exportButton, walkButton, exportProgressIndicator);
+		HBox row5 = new HBox(30, exportButton, walkButton, exportMemeNodesButton, exportProgressIndicator);
 		
 		root.getChildren().addAll(row1, row2, row3, row4, row5);
 		root.setPadding(new Insets(30));
@@ -78,6 +79,9 @@ public class RDF2WalkTab extends Tab
 		
 		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("WALK files (*.walk)", "*.walk");
 		exportFileChooser.getExtensionFilters().add(extFilter);
+		
+		FileChooser.ExtensionFilter extFilter2 = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+		exportMemeNodesFileChooser.getExtensionFilters().add(extFilter2);
 		
 		ontologyLoadedLabel.setTextOverrun(OverrunStyle.ELLIPSIS);
 		ontologyLoadedLabel.setPadding(new Insets(10));
@@ -176,6 +180,7 @@ public class RDF2WalkTab extends Tab
 		});
 		
 		exportButton.setOnAction(e -> onExportButtonPressed());
+		exportMemeNodesButton.setOnAction(e -> onExportMemeNodesButtonPressed());
 		
 		walkButton.setOnAction(e -> onWalkButtonPressed());
 		
@@ -199,6 +204,16 @@ public class RDF2WalkTab extends Tab
 		}
 	}
 	
+	private void onExportMemeNodesButtonPressed()
+	{
+		Window window = getTabPane().getScene().getWindow();
+		File file = exportMemeNodesFileChooser.showSaveDialog(window);
+		if(file != null && rdfGraph != null)
+		{
+			MemeNodesExporter.export(file.getAbsolutePath(), rdfGraph.getMemeNodes());
+		}
+	}
+	
 	private void onWalkButtonPressed()
 	{
 		showProgressIndicator(true);
@@ -209,10 +224,10 @@ public class RDF2WalkTab extends Tab
 		new Thread(() ->
 		{
 			dataset = RDFLoader.loadFiles(ontologyDirectory.getAbsolutePath(), "Meme Ontology");
-			List<GraphNode> graph = GraphCreator.createGraph(dataset);
+			rdfGraph = GraphCreator.createGraph(dataset);
 			GraphWalker walker = new RandomWalker();
 			Platform.runLater(() -> updateProgressIndicator(0));
-			walks = walker.walk(graph, nodesToWalk, numWalksPerNode, depth);
+			walks = walker.walk(rdfGraph, nodesToWalk, numWalksPerNode, depth);
 			Platform.runLater(() -> updateProgressIndicator(1));
 		}).start();
 	}
@@ -230,6 +245,7 @@ public class RDF2WalkTab extends Tab
 		}
 		exportButton.setDisable(directory == null);
 		walkButton.setDisable(directory == null);
+		exportMemeNodesButton.setDisable(directory == null);
 	}
 	
 	private void showProgressIndicator(boolean show)
@@ -245,9 +261,11 @@ public class RDF2WalkTab extends Tab
 	private File ontologyDirectory;
 	private Dataset dataset;
 	private Walk[] walks;
+	private RDFGraph rdfGraph;
 	
 	private final VBox root;
 	private final FileChooser exportFileChooser;
+	private final FileChooser exportMemeNodesFileChooser;
 	private final DirectoryChooser ontologyDirectoryChooser;
 	private final Label ontologyLabel;
 	private final Label ontologyLoadedLabel;
@@ -260,5 +278,6 @@ public class RDF2WalkTab extends Tab
 	private final TextField walksPerNodeTextField;
 	private final Button exportButton;
 	private final Button walkButton;
+	private final Button exportMemeNodesButton;
 	private final ProgressIndicator exportProgressIndicator;
 }

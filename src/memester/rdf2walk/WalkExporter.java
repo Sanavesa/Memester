@@ -29,7 +29,7 @@ public final class WalkExporter
 			
 			for(Walk walk : walks)
 			{
-				System.out.println(walk);
+//				System.out.println(walk);
 				writer.println(walk);
 			}
 			

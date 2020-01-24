@@ -1,7 +1,5 @@
 package memester.rdf2walk;
 
-import java.util.List;
-
 import org.apache.jena.graph.Node;
 
 /**
@@ -20,39 +18,33 @@ public class RandomWalker implements GraphWalker
 	 * The depth is basically how many elements are in the walk.
 	 * A walk with depth of 3 means A->B->C.
 	 * 
-	 * @param graph - the RDF graph
+	 * @param graph - the RDF graph to traverse that also contains the meme nodes in the graph
 	 * @param nodesToWalk - the number of nodes in the graph to generate walks for
 	 * @param numWalksPerNode - the number of walks to create for each node
 	 * @param depth - the depth of the walk
 	 * @return
 	 */
 	@Override
-	public Walk[] walk(List<GraphNode> graph, int nodesToWalk, int numWalksPerNode, int depth)
+	public Walk[] walk(RDFGraph graph, int nodesToWalk, int numWalksPerNode, int depth)
 	{
+		nodesToWalk = Math.min(nodesToWalk, graph.getMemeNodes().size());
 		final int totalWalks = nodesToWalk * numWalksPerNode;
 		final Walk[] walks = new Walk[totalWalks];
 		int walkIndex = 0;
 		
 		final long startTime = System.nanoTime();
-		System.out.println("Starting walk for " + nodesToWalk + " nodes with " + numWalksPerNode + " walks each at a depth of " + depth + "...");
+		System.out.println("Starting walk for " + nodesToWalk + " memes with " + numWalksPerNode + " walks each at a depth of " + depth + "...");
 		
-		for(final GraphNode graphNode : graph)
+		for(final GraphNode memeNode : graph.getMemeNodes())
 		{
 			if(walkIndex >= totalWalks)
 				break;
-			
-			final Node node = graphNode.getNode();
-			
-			if(isInvalidNode(node))
-			{
-				continue;
-			}
 			
 			for(int i = 0; i < numWalksPerNode; i++)
 			{
 				final Node[] sequence = new Node[depth];
 				
-				GraphNode currentGraphNode = graphNode;
+				GraphNode currentGraphNode = memeNode;
 				
 				for(int j = 0; j < depth; j+=1)
 				{
@@ -61,28 +53,8 @@ public class RandomWalker implements GraphWalker
 					final int randomIndex = (int) (Math.random() * currentGraphNode.getConnections().size());
 					GraphConnection conn = currentGraphNode.getConnections().get(randomIndex);
 					
-//					if(j+1 < depth)
-//					{
-//						sequence[j+1] = conn.getPredicate();
-//					}
-					
 					currentGraphNode = conn.getObject();
 				}
-				
-//				for(int j = 0; j < depth; j+=2)
-//				{
-//					sequence[j] = currentGraphNode.getNode();
-//					
-//					final int randomIndex = (int) (Math.random() * currentGraphNode.getConnections().size());
-//					GraphConnection conn = currentGraphNode.getConnections().get(randomIndex);
-//					
-//					if(j+1 < depth)
-//					{
-//						sequence[j+1] = conn.getPredicate();
-//					}
-//					
-//					currentGraphNode = conn.getObject();
-//				}
 				
 				final Walk w = new Walk(sequence);
 				walks[walkIndex++] = w;
@@ -93,36 +65,5 @@ public class RandomWalker implements GraphWalker
 		System.out.println("Done walking! Elapsed time: " + elapsedTime + " secs\n");
 		
 		return walks;
-	}
-	
-	private boolean isInvalidNode(Node node)
-	{
-		if(node == null)
-			return true;
-
-		if(node.isLiteral())
-			return true;
-		
-		String iri = "";
-		try
-		{
-			iri = node.getURI();
-		}
-		catch(Exception e)
-		{
-			return true;
-		}
-
-		if(!iri.contains("http://erau-semantic-research.com/2019/memo/0.1/"))
-			return true;
-		
-		// properties are always lowerCase i.e: relatedMeme
-		if(Character.isLowerCase(iri.charAt("http://erau-semantic-research.com/2019/memo/0.1/".length())))
-			return true;
-		
-		if(!iri.contains("Meme"))
-			return true;
-
-		return false;
 	}
 }
