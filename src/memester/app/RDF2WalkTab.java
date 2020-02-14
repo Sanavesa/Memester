@@ -223,7 +223,7 @@ public class RDF2WalkTab extends Tab
 		
 		new Thread(() ->
 		{
-			dataset = RDFLoader.loadFiles(ontologyDirectory.getAbsolutePath(), "Meme Ontology");
+			dataset = RDFLoader.loadFiles(ontologyDirectory.getAbsolutePath(), "Meme Ontology Cache");
 			rdfGraph = GraphCreator.createGraph(dataset);
 			GraphWalker walker = new RandomWalker();
 			Platform.runLater(() -> updateProgressIndicator(0));

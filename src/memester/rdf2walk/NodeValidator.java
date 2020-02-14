@@ -29,7 +29,10 @@ public class NodeValidator
 		if(iri.equals(Constants.BASE_IRI))
 			return true;
 		
-		if(iri.equals(Constants.BASE_IRI + "Meme"))
+		if(iri.equals(Constants.BASE_IRI + "Number"))
+			return true;
+		
+		if(iri.contains("Attribute"))
 			return true;
 
 		if(!iri.contains(Constants.BASE_IRI))
@@ -39,7 +42,7 @@ public class NodeValidator
 		if(Character.isLowerCase(iri.charAt(Constants.BASE_IRI.length())))
 			return true;
 		
-		if(!iri.endsWith("Meme"))
+		if(iri.endsWith("Attribute"))
 			return true;
 
 		return false;
