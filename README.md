@@ -15,7 +15,7 @@ Generates vectors for each "word" in a walk "sentence", using Word2Vec AI in Pyt
 Takes the vectors and clusters them into groups to try to find similarities between them.
 
 ### Principal Component Analysis (PCA)
-The vectors produced have 500 components, so PCA attempts to reduce these vectors to two dimensions for visualization.
+The vectors produced have 50 components, so PCA attempts to reduce these vectors to two dimensions for visualization.
 
 ## Data Flow Diagram
 ![alt text](https://github.com/Sanavesa/Memester/blob/master/resources/DFD.png)
